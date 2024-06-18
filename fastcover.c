@@ -639,7 +639,7 @@ ZDICT_optimizeTrainFromBuffer_fastCover(
     const unsigned accel = parameters->accel == 0 ? DEFAULT_ACCEL : parameters->accel;
     const unsigned shrinkDict = 0;
     /* Local variables */
-    const int displayLevel = (int)parameters->zParams.notificationLevel;
+    const int displayLevel = 3; // (int)parameters->zParams.notificationLevel;
     unsigned iteration = 1;
     unsigned d;
     unsigned k;
@@ -681,6 +681,7 @@ ZDICT_optimizeTrainFromBuffer_fastCover(
     accelParams = FASTCOVER_defaultAccelParameters[accel];
     /* Turn down global display level to clean up display at level 2 and below */
     g_displayLevel = displayLevel == 0 ? 0 : displayLevel - 1;
+
     /* Loop through d first because each new value needs a new context */
     LOCALDISPLAYLEVEL(displayLevel, 2, "Trying %u different sets of parameters\n",
                       kIterations);
