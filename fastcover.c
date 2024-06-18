@@ -417,8 +417,6 @@ FASTCOVER_buildDictionary(const FASTCOVER_ctx_t* ctx,
    * is full.
    */
   for (epoch = 0; tail > 0; epoch = (epoch + 1) % epochs.num) {
-    DISPLAYLEVEL(2, "Epoch %u\n", (U32)epoch);
-
     const U32 epochBegin = (U32)(epoch * epochs.size);
     const U32 epochEnd = epochBegin + epochs.size;
     size_t segmentSize;
@@ -430,7 +428,9 @@ FASTCOVER_buildDictionary(const FASTCOVER_ctx_t* ctx,
      * There may be new content in other epochs, for continue for some time.
      */
     if (segment.score == 0) {
+      DISPLAYLEVEL(2, "segment.score == 0, epoch: %u\n", epoch);
       if (++zeroScoreRun >= maxZeroScoreRun) {
+          DISPLAYLEVEL(2, "Giving up!\n");
           break;
       }
       continue;
